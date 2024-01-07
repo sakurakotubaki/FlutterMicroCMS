@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:microcms_api/core/logger.dart';
 import 'package:microcms_api/usecase/microcms_notifier.dart';
 
 class BlogPage extends ConsumerWidget {
@@ -24,7 +25,7 @@ class BlogPage extends ConsumerWidget {
             itemCount: data.length,
             itemBuilder: (context, index) {
               final title = data[index].title;
-              print('インデックス: $index, データ: ${data[index]}'); // ログ出力
+              logger.d('インデックス: $index, データ: ${data[index]}'); // ログ出力
               return ListTile(
                 // 画像を表示
                 leading: data[index].eyecatch != null

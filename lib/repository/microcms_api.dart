@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:microcms_api/core/logger.dart';
 import 'package:microcms_api/model/blog_state.dart';
 import 'package:microcms_api/repository/api_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -16,19 +17,19 @@ class MicroCmsApi with ApiService {
         // 'contents'フィールドを再度チェック
         final contents = data['contents'] as List;
         final contentsList = contents.map((content) {
-          print('リポジトリのコード🦁: $content'); // content mapをログに出力
+          logger.d('リポジトリのコード🦁: $content'); // content mapをログに出力
           return ResponseModel.fromJson(content);
         }).toList();
         return contentsList;
       } else {
-        print('Error: contents field is missing or null in data');
+        logger.d('Error: contents field is missing or null in data');
         throw Exception('contents field is missing or null in data');
       }
     } on DioException catch (e) {
-      print('Dioのエラー: $e');
+      logger.d('Dioのエラー: $e');
       throw Exception(e.message);
     } catch (e) {
-      print('すべてのエラー: $e');
+      logger.d('すべてのエラー: $e');
       throw Exception(e);
     }
   }
